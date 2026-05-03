@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             itemStartY = rect.top;
             mascot.style.cursor = 'grabbing';
             mascot.style.transition = 'none';
+            mascot.classList.add('is-dragging');
         } else {
             itemStartX = item.x;
             itemStartY = item.y;
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (draggedItem) {
             if (draggedItem.isMascot) {
                 mascot.style.cursor = 'grab';
+                mascot.classList.remove('is-dragging');
             } else {
                 draggedItem.item.isDragging = false;
                 draggedItem.item.el.style.zIndex = '1';

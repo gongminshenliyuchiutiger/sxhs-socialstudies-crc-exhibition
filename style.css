@@ -67,6 +67,7 @@ body {
     padding: 4rem 2rem;
     z-index: 5;
     position: relative;
+    transition: padding 0.3s ease;
 }
 
 .hero {
@@ -142,6 +143,13 @@ h1 {
 .portal-card:nth-child(4) { grid-column: 2 / span 2; }
 .portal-card:nth-child(5) { grid-column: 4 / span 2; }
 
+/* Dragging feedback class */
+.is-dragging {
+    opacity: 0.8;
+    transform: scale(1.1) !important;
+    z-index: 2000 !important;
+}
+
 .portal-card:hover {
     transform: translateY(-10px) scale(1.02);
     border-color: var(--accent);
@@ -193,21 +201,73 @@ h1 {
 }
 
 .mascot-container:hover {
-    filter: drop-shadow(0 0 20px #00d2ff);
-    animation: mascotShake 0.5s ease-in-out infinite;
+    animation: mascotShake 0.5s ease-in-out infinite, neonGlow 2s linear infinite;
+    cursor: grab;
 }
 
 @keyframes mascotShake {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-2px, -2px) rotate(-3deg); }
-    75% { transform: translate(2px, 2px) rotate(3deg); }
+    20% { transform: translate(-3px, 1px) rotate(-2deg); }
+    40% { transform: translate(3px, -1px) rotate(2deg); }
+    60% { transform: translate(-3px, -1px) rotate(-1deg); }
+    80% { transform: translate(3px, 1px) rotate(1deg); }
+}
+
+@keyframes neonGlow {
+    0% { filter: drop-shadow(0 0 15px #ff0080) brightness(1.1); }
+    33% { filter: drop-shadow(0 0 25px #00d2ff) brightness(1.2); }
+    66% { filter: drop-shadow(0 0 20px #00ff88) brightness(1.1); }
+    100% { filter: drop-shadow(0 0 15px #ff0080) brightness(1.1); }
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .portal-grid {
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 900px) {
-    .portal-grid { grid-template-columns: 1fr; }
-    .portal-card { grid-column: span 1 !important; }
-    .mascot-container { width: 120px; }
+    .portal-grid { 
+        grid-template-columns: 1fr; 
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .portal-card { 
+        grid-column: span 1 !important; 
+    }
+    .mascot-container { width: 140px; }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+    .hero {
+        margin-bottom: 3rem;
+    }
+    h1 {
+        white-space: normal;
+        line-height: 1.2;
+    }
+    .subtitle {
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+    }
+    .portal-card {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+    .icon-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    .mascot-container { 
+        width: 100px; 
+        bottom: 20px;
+        left: 20px;
+    }
 }
 
 /* Footer */
